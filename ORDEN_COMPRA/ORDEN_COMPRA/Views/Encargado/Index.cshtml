@@ -1,0 +1,28 @@
+﻿@using ORDEN_COMPRA.Models;
+@model List<EncargadoCLS>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Reporte de Encargados</h2>
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <td width="10%">@Html.LabelFor(p=>Model[0].ruccliente)</td>
+            <td width="20%">@Html.LabelFor(p=>Model[0].nombreempresa)</td>
+            <td width="70%">@Html.LabelFor(p=>Model[0].padron)</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            @foreach(var item in Model)
+            {
+                <tr>
+                    <td>@item.ruccliente</td>
+                    <td>@item.nombreempresa</td>
+                    <td>@item.padron</td>
+                </tr>
+            }
+        </tr>
+    </tbody>
+</table>

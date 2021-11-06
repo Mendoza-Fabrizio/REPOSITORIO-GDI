@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3bf8d652f01b47ec9442a89270a6a579" Name="Diagram1" ZoomLevel="85">
+        <EntityTypeShape EntityType="OCModel.ARTICULO" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="OCModel.DATOS_COMPRA" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OCModel.ENCARGADO" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OCModel.PAGO" Width="1.5" PointX="1.875" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OCModel.PROVEEDOR" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OCModel.INCLUYE" Width="1.5" PointX="5.25" PointY="7.125" IsExpanded="true" />
+        <AssociationConnector Association="OCModel.FK__ARTICULO__RUC_pr__45F365D3" ManuallyRouted="false" />
+        <AssociationConnector Association="OCModel.FK__INCLUYE__codigo___48CFD27E" ManuallyRouted="false" />
+        <AssociationConnector Association="OCModel.FK__DATOS_COM__moned__4316F928" ManuallyRouted="false" />
+        <AssociationConnector Association="OCModel.FK__DATOS_COM__RUC_c__412EB0B6" ManuallyRouted="false" />
+        <AssociationConnector Association="OCModel.FK__DATOS_COM__RUC_p__4222D4EF" ManuallyRouted="false" />
+        <AssociationConnector Association="OCModel.FK__INCLUYE__nro_ord__47DBAE45" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
