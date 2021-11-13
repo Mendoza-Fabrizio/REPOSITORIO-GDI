@@ -13,7 +13,7 @@ namespace ORDEN_COMPRA.Models
         [Display(Name = "Nombre Articulo")]
         public string nombrearticulo { get; set; }
         [Display(Name = "Precio")]
-        public float precio { get; set; }
+        public decimal precio { get; set; }
         [Display(Name = "Stock")]
         public int stock { get; set; }
         [Display(Name = "Unidad")]
