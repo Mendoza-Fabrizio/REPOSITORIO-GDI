@@ -4,11 +4,11 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="3bf8d652f01b47ec9442a89270a6a579" Name="Diagram1" ZoomLevel="85">
+      <Diagram DiagramId="8bf10a515d53495282c6b39ff5ef9aff" Name="Diagram1" ZoomLevel="85">
         <EntityTypeShape EntityType="OCModel.ARTICULO" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
         <EntityTypeShape EntityType="OCModel.DATOS_COMPRA" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="OCModel.ENCARGADO" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="OCModel.PAGO" Width="1.5" PointX="1.875" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OCModel.PAGO" Width="1.5" PointX="0.75" PointY="11.25" IsExpanded="true" />
         <EntityTypeShape EntityType="OCModel.PROVEEDOR" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="OCModel.INCLUYE" Width="1.5" PointX="5.25" PointY="7.125" IsExpanded="true" />
         <AssociationConnector Association="OCModel.FK__ARTICULO__RUC_pr__45F365D3" ManuallyRouted="false" />

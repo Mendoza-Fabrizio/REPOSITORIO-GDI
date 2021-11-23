@@ -1,0 +1,190 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="OCModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ARTICULO">
+    <Key>
+      <PropertyRef Name="codigo_A" />
+    </Key>
+    <Property Name="codigo_A" Type="varchar" MaxLength="9" Nullable="false" />
+    <Property Name="RUC_proveedor" Type="varchar" MaxLength="11" Nullable="false" />
+    <Property Name="nombre_articulo" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="precio" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+    <Property Name="stock" Type="int" Nullable="false" />
+    <Property Name="unidad" Type="varchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DATOS_COMPRA">
+    <Key>
+      <PropertyRef Name="nro_orden_compra" />
+    </Key>
+    <Property Name="nro_orden_compra" Type="varchar" MaxLength="16" Nullable="false" />
+    <Property Name="RUC_cliente" Type="varchar" MaxLength="11" Nullable="false" />
+    <Property Name="RUC_proveedor" Type="varchar" MaxLength="11" Nullable="false" />
+    <Property Name="moneda" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="solicitante" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="obra" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="orden_de_taller" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="representante" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="prioridad_compra" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="autorizante" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="requerimiento" Type="varchar" MaxLength="16" Nullable="false" />
+    <Property Name="metodo_de_pago" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="observaciones" Type="varchar" MaxLength="9" />
+    <Property Name="fecha" Type="date" Nullable="false" />
+    <Property Name="SubtoTal_T" Type="decimal" Precision="8" Scale="2" />
+    <Property Name="Total" Type="decimal" Precision="8" Scale="2" />
+  </EntityType>
+  <EntityType Name="ENCARGADO">
+    <Key>
+      <PropertyRef Name="RUC_cliente" />
+    </Key>
+    <Property Name="RUC_cliente" Type="varchar" MaxLength="11" Nullable="false" />
+    <Property Name="nombre_Empresa" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="padron" Type="varchar" MaxLength="15" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'OC.dbo.INCLUYE' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="INCLUYE">
+    <Key>
+      <PropertyRef Name="nro_orden_compra" />
+      <PropertyRef Name="codigo_A" />
+      <PropertyRef Name="cantidad" />
+    </Key>
+    <Property Name="nro_orden_compra" Type="varchar" MaxLength="16" Nullable="false" />
+    <Property Name="codigo_A" Type="varchar" MaxLength="9" Nullable="false" />
+    <Property Name="cantidad" Type="int" Nullable="false" />
+    <Property Name="subtotal" Type="decimal" Precision="8" Scale="2" />
+  </EntityType>
+  <EntityType Name="PAGO">
+    <Key>
+      <PropertyRef Name="moneda" />
+    </Key>
+    <Property Name="moneda" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="Tipo_de_cambio" Type="decimal" Precision="8" Scale="6" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PROVEEDOR">
+    <Key>
+      <PropertyRef Name="RUC_proveedor" />
+    </Key>
+    <Property Name="RUC_proveedor" Type="varchar" MaxLength="11" Nullable="false" />
+    <Property Name="nombre_empresa" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="padron" Type="varchar" MaxLength="15" />
+    <Property Name="ciudad" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="distrito" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="calle" Type="varchar" MaxLength="35" Nullable="false" />
+    <Property Name="numero" Type="varchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__ARTICULO__RUC_pr__45F365D3">
+    <End Role="PROVEEDOR" Type="Self.PROVEEDOR" Multiplicity="1" />
+    <End Role="ARTICULO" Type="Self.ARTICULO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PROVEEDOR">
+        <PropertyRef Name="RUC_proveedor" />
+      </Principal>
+      <Dependent Role="ARTICULO">
+        <PropertyRef Name="RUC_proveedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DATOS_COM__moned__4316F928">
+    <End Role="PAGO" Type="Self.PAGO" Multiplicity="1" />
+    <End Role="DATOS_COMPRA" Type="Self.DATOS_COMPRA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PAGO">
+        <PropertyRef Name="moneda" />
+      </Principal>
+      <Dependent Role="DATOS_COMPRA">
+        <PropertyRef Name="moneda" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DATOS_COM__RUC_c__412EB0B6">
+    <End Role="ENCARGADO" Type="Self.ENCARGADO" Multiplicity="1" />
+    <End Role="DATOS_COMPRA" Type="Self.DATOS_COMPRA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ENCARGADO">
+        <PropertyRef Name="RUC_cliente" />
+      </Principal>
+      <Dependent Role="DATOS_COMPRA">
+        <PropertyRef Name="RUC_cliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DATOS_COM__RUC_p__4222D4EF">
+    <End Role="PROVEEDOR" Type="Self.PROVEEDOR" Multiplicity="1" />
+    <End Role="DATOS_COMPRA" Type="Self.DATOS_COMPRA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PROVEEDOR">
+        <PropertyRef Name="RUC_proveedor" />
+      </Principal>
+      <Dependent Role="DATOS_COMPRA">
+        <PropertyRef Name="RUC_proveedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__INCLUYE__codigo___48CFD27E">
+    <End Role="ARTICULO" Type="Self.ARTICULO" Multiplicity="1" />
+    <End Role="INCLUYE" Type="Self.INCLUYE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ARTICULO">
+        <PropertyRef Name="codigo_A" />
+      </Principal>
+      <Dependent Role="INCLUYE">
+        <PropertyRef Name="codigo_A" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__INCLUYE__nro_ord__47DBAE45">
+    <End Role="DATOS_COMPRA" Type="Self.DATOS_COMPRA" Multiplicity="1" />
+    <End Role="INCLUYE" Type="Self.INCLUYE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DATOS_COMPRA">
+        <PropertyRef Name="nro_orden_compra" />
+      </Principal>
+      <Dependent Role="INCLUYE">
+        <PropertyRef Name="nro_orden_compra" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="sp_ordenCompra_entre_fecha" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="limteInf" Type="date" Mode="In" />
+    <Parameter Name="limteSup" Type="date" Mode="In" />
+  </Function>
+  <EntityContainer Name="OCModelStoreContainer">
+    <EntitySet Name="ARTICULO" EntityType="Self.ARTICULO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DATOS_COMPRA" EntityType="Self.DATOS_COMPRA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ENCARGADO" EntityType="Self.ENCARGADO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PAGO" EntityType="Self.PAGO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PROVEEDOR" EntityType="Self.PROVEEDOR" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="INCLUYE" EntityType="Self.INCLUYE" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [INCLUYE].[nro_orden_compra] AS [nro_orden_compra], 
+    [INCLUYE].[codigo_A] AS [codigo_A], 
+    [INCLUYE].[cantidad] AS [cantidad], 
+    [INCLUYE].[subtotal] AS [subtotal]
+    FROM [dbo].[INCLUYE] AS [INCLUYE]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK__ARTICULO__RUC_pr__45F365D3" Association="Self.FK__ARTICULO__RUC_pr__45F365D3">
+      <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
+      <End Role="ARTICULO" EntitySet="ARTICULO" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DATOS_COM__moned__4316F928" Association="Self.FK__DATOS_COM__moned__4316F928">
+      <End Role="PAGO" EntitySet="PAGO" />
+      <End Role="DATOS_COMPRA" EntitySet="DATOS_COMPRA" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DATOS_COM__RUC_c__412EB0B6" Association="Self.FK__DATOS_COM__RUC_c__412EB0B6">
+      <End Role="ENCARGADO" EntitySet="ENCARGADO" />
+      <End Role="DATOS_COMPRA" EntitySet="DATOS_COMPRA" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DATOS_COM__RUC_p__4222D4EF" Association="Self.FK__DATOS_COM__RUC_p__4222D4EF">
+      <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
+      <End Role="DATOS_COMPRA" EntitySet="DATOS_COMPRA" />
+    </AssociationSet>
+    <AssociationSet Name="FK__INCLUYE__codigo___48CFD27E" Association="Self.FK__INCLUYE__codigo___48CFD27E">
+      <End Role="ARTICULO" EntitySet="ARTICULO" />
+      <End Role="INCLUYE" EntitySet="INCLUYE" />
+    </AssociationSet>
+    <AssociationSet Name="FK__INCLUYE__nro_ord__47DBAE45" Association="Self.FK__INCLUYE__nro_ord__47DBAE45">
+      <End Role="DATOS_COMPRA" EntitySet="DATOS_COMPRA" />
+      <End Role="INCLUYE" EntitySet="INCLUYE" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

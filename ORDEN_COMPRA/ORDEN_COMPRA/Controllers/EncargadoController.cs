@@ -11,7 +11,7 @@ namespace ORDEN_COMPRA.Controllers
         // GET: Encargado
         public ActionResult Index()
         {
-            using(var bd = new OrdenCompraEntities())
+            using(var bd = new OCEntities())
             {
                 List<EncargadoCLS> listaEncargado = null;
                 listaEncargado = (from encargado in bd.ENCARGADO

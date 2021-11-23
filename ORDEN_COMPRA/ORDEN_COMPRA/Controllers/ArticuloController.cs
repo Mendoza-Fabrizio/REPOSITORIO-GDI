@@ -11,7 +11,7 @@ namespace ORDEN_COMPRA.Controllers
         // GET: Articulo
         public ActionResult Index()
         {
-            using(var bd =new OrdenCompraEntities())
+            using(var bd =new OCEntities())
             {
                 List<ArticuloCLS> listaArticulo = null;
                 listaArticulo = (from articulo in bd.ARTICULO

@@ -1,0 +1,53 @@
+﻿@using ORDEN_COMPRA.Models
+@model ProveedorCLS
+@{
+    ViewBag.Title = "Agregar";
+}
+
+<h2>Agregar</h2>
+<div class="row>
+    <div class="col-md-6">
+        @using (Html.BeginForm("Agregar", "Proveedor", FormMethod.Post))
+        {
+            <div>
+                @Html.LabelFor(p => p.rucproveedor)
+                @Html.TextBoxFor(p => p.rucproveedor, new { @class = "form-control" })
+                @Html.ValidationMessage("RUC PROVEEDOR", new { @class = "text-danger" })
+            </div>
+            <div>
+                @Html.LabelFor(p => p.nombreempresa)
+                @Html.TextBoxFor(p => p.nombreempresa, new { @class = "form-control" })
+                @Html.ValidationMessage("nombre", new { @class = "text-danger" })
+            </div>
+            <div>
+                @Html.LabelFor(p => p.padron)
+                @Html.TextBoxFor(p => p.padron, new { @class = "form-control" })
+                @Html.ValidationMessage("padron", new { @class = "text-danger" })
+            </div>
+            <div>
+                @Html.LabelFor(p => p.ciudad)
+                @Html.TextBoxFor(p => p.ciudad, new { @class = "form-control" })
+                @Html.ValidationMessage("ciudad", new { @class = "text-danger" })
+            </div>
+            <div>
+                @Html.LabelFor(p => p.distrito)
+                @Html.TextBoxFor(p => p.distrito, new { @class = "form-control" })
+                @Html.ValidationMessage("Distrito", new { @class = "text-danger" })
+            </div>
+            <div>
+                @Html.LabelFor(p => p.calle)
+                @Html.TextBoxFor(p => p.calle, new { @class = "form-control" })
+                @Html.ValidationMessage("calle", new { @class = "text-danger" })
+            </div>
+            <div>
+                @Html.LabelFor(p => p.numero)
+                @Html.TextBoxFor(p => p.numero, new { @class = "form-control" })
+                @Html.ValidationMessage("numero", new { @class = "text-danger" })
+            </div>
+            <br />
+            <div style ="margin:auto">
+                <input type="submit" class="btn btn-primary" value="Guardar" />
+            </div>
+        }
+    </div>
+</div>

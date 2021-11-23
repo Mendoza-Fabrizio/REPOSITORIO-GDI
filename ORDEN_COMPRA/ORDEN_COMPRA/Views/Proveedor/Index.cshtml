@@ -5,6 +5,7 @@
 }
 
 <h2>Reporte de Proveedores</h2>
+@Html.ActionLink("Agregar", "Agregar", "Proveedor", null, new {@class ="btn btn-primary"})
 <table class="table table-bordered table-hover">
     <thead>
         <tr>
@@ -17,8 +18,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            @foreach(var item in Model)
+        @foreach(var item in Model)
             {
                 <tr>
                     <td>@item.rucproveedor</td>
@@ -29,6 +29,5 @@
                     <td>@item.numero</td>
                 </tr>
             }
-        </tr>
     </tbody>
 </table>

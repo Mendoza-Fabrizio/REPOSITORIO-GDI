@@ -1,0 +1,51 @@
+﻿@using ORDEN_COMPRA.Models
+@model List<DatosCompraCLS>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<table class="table table-bordered table-hover">
+    <tr>
+        <td>@Html.LabelFor(p => Model[0].nroordencompra)</td>
+        <td>@Html.LabelFor(p => Model[0].ruccliente)</td>
+        <td>@Html.LabelFor(p => Model[0].rucproveedor)</td>
+        <td>@Html.LabelFor(p => Model[0].moneda)</td>
+        <td>@Html.LabelFor(p => Model[0].solicitante)</td>
+        <td>@Html.LabelFor(p => Model[0].obra)</td>
+        <td>@Html.LabelFor(p => Model[0].ordentaller)</td>
+        <td>@Html.LabelFor(p => Model[0].representante)</td>
+        <td>@Html.LabelFor(p => Model[0].prioridad_compra)</td>
+        <td>@Html.LabelFor(p => Model[0].autorizante)</td>
+        <td>@Html.LabelFor(p => Model[0].requerimiento)</td>
+        <td>@Html.LabelFor(p => Model[0].metodopago)</td>
+        <td>@Html.LabelFor(p => Model[0].observaciones)</td>
+        <td>@Html.LabelFor(p => Model[0].Fecha)</td>
+        <td>@Html.LabelFor(p => Model[0].Subtotal)</td>
+        <td>@Html.LabelFor(p => Model[0].Total)</td>
+    </tr>
+    <tbody>
+        @foreach(var item in Model)
+            {
+        <tr>
+            <td>@item.nroordencompra</td>
+            <td>@item.ruccliente</td>
+            <td>@item.rucproveedor</td>
+            <td>@item.moneda</td>
+            <td>@item.solicitante</td>
+            <td>@item.obra</td>
+            <td>@item.ordentaller</td>
+            <td>@item.representante</td>
+            <td>@item.prioridad_compra</td>
+            <td>@item.autorizante</td>
+            <td>@item.requerimiento</td>
+            <td>@item.metodopago</td>
+            <td>@item.observaciones</td>
+            <td>@item.Fecha</td>
+            <td>@item.Subtotal</td>
+            <td>@item.Total</td>
+        </tr>
+            }
+    </tbody>
+</table>
+

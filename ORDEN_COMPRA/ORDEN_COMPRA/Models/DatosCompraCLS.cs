@@ -21,7 +21,7 @@ namespace ORDEN_COMPRA.Models
         public string metodopago { get; set; }
         public string observaciones { get; set; }
         public DateTime Fecha { get; set; }
-        public float Subtotal { get; set; }
-        public float Total { get; set; }
+        public decimal? Subtotal { get; set; }
+        public decimal? Total { get; set; }
     }
 }

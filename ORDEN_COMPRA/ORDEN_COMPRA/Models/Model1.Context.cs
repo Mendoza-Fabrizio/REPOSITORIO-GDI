@@ -12,11 +12,13 @@ namespace ORDEN_COMPRA.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
-    public partial class OrdenCompraEntities : DbContext
+    public partial class OCEntities : DbContext
     {
-        public OrdenCompraEntities()
-            : base("name=OrdenCompraEntities")
+        public OCEntities()
+            : base("name=OCEntities")
         {
         }
     
@@ -31,5 +33,18 @@ namespace ORDEN_COMPRA.Models
         public virtual DbSet<PAGO> PAGO { get; set; }
         public virtual DbSet<PROVEEDOR> PROVEEDOR { get; set; }
         public virtual DbSet<INCLUYE> INCLUYE { get; set; }
+    
+        public virtual ObjectResult<string> sp_ordenCompra_entre_fecha(Nullable<System.DateTime> limteInf, Nullable<System.DateTime> limteSup)
+        {
+            var limteInfParameter = limteInf.HasValue ?
+                new ObjectParameter("limteInf", limteInf) :
+                new ObjectParameter("limteInf", typeof(System.DateTime));
+    
+            var limteSupParameter = limteSup.HasValue ?
+                new ObjectParameter("limteSup", limteSup) :
+                new ObjectParameter("limteSup", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("sp_ordenCompra_entre_fecha", limteInfParameter, limteSupParameter);
+        }
     }
 }

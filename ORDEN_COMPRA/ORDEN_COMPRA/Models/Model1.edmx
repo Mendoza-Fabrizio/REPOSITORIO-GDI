@@ -149,6 +149,10 @@ advertencia 6002: La tabla o vista 'OC.dbo.INCLUYE' no tiene definida ninguna cl
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="sp_ordenCompra_entre_fecha" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="limteInf" Type="date" Mode="In" />
+          <Parameter Name="limteSup" Type="date" Mode="In" />
+        </Function>
         <EntityContainer Name="OCModelStoreContainer">
           <EntitySet Name="ARTICULO" EntityType="Self.ARTICULO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DATOS_COMPRA" EntityType="Self.DATOS_COMPRA" Schema="dbo" store:Type="Tables" />
@@ -347,7 +351,7 @@ advertencia 6002: La tabla o vista 'OC.dbo.INCLUYE' no tiene definida ninguna cl
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="OrdenCompraEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="OCEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ARTICULO" EntityType="Self.ARTICULO" />
           <EntitySet Name="DATOS_COMPRA" EntityType="Self.DATOS_COMPRA" />
           <EntitySet Name="ENCARGADO" EntityType="Self.ENCARGADO" />
@@ -378,13 +382,17 @@ advertencia 6002: La tabla o vista 'OC.dbo.INCLUYE' no tiene definida ninguna cl
             <End Role="DATOS_COMPRA" EntitySet="DATOS_COMPRA" />
             <End Role="INCLUYE" EntitySet="INCLUYE" />
           </AssociationSet>
+          <FunctionImport Name="sp_ordenCompra_entre_fecha" ReturnType="Collection(String)">
+            <Parameter Name="limteInf" Mode="In" Type="DateTime" />
+            <Parameter Name="limteSup" Mode="In" Type="DateTime" />
+          </FunctionImport>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="OCModelStoreContainer" CdmEntityContainer="OrdenCompraEntities">
+        <EntityContainerMapping StorageEntityContainer="OCModelStoreContainer" CdmEntityContainer="OCEntities">
           <EntitySetMapping Name="ARTICULO">
             <EntityTypeMapping TypeName="OCModel.ARTICULO">
               <MappingFragment StoreEntitySet="ARTICULO">
@@ -459,6 +467,7 @@ advertencia 6002: La tabla o vista 'OC.dbo.INCLUYE' no tiene definida ninguna cl
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_ordenCompra_entre_fecha" FunctionName="OCModel.Store.sp_ordenCompra_entre_fecha" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

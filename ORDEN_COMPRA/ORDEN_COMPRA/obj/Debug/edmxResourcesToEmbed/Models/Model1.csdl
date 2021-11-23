@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="OCModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="ARTICULO">
+    <Key>
+      <PropertyRef Name="codigo_A" />
+    </Key>
+    <Property Name="codigo_A" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="RUC_proveedor" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nombre_articulo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="precio" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+    <Property Name="stock" Type="Int32" Nullable="false" />
+    <Property Name="unidad" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="PROVEEDOR" Relationship="Self.FK__ARTICULO__RUC_pr__45F365D3" FromRole="ARTICULO" ToRole="PROVEEDOR" />
+    <NavigationProperty Name="INCLUYE" Relationship="Self.FK__INCLUYE__codigo___48CFD27E" FromRole="ARTICULO" ToRole="INCLUYE" />
+  </EntityType>
+  <EntityType Name="DATOS_COMPRA">
+    <Key>
+      <PropertyRef Name="nro_orden_compra" />
+    </Key>
+    <Property Name="nro_orden_compra" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="RUC_cliente" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="RUC_proveedor" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="moneda" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="solicitante" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="obra" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="orden_de_taller" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="representante" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="prioridad_compra" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="autorizante" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="requerimiento" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="metodo_de_pago" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="observaciones" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+    <Property Name="fecha" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="SubtoTal_T" Type="Decimal" Precision="8" Scale="2" />
+    <Property Name="Total" Type="Decimal" Precision="8" Scale="2" />
+    <NavigationProperty Name="PAGO" Relationship="Self.FK__DATOS_COM__moned__4316F928" FromRole="DATOS_COMPRA" ToRole="PAGO" />
+    <NavigationProperty Name="ENCARGADO" Relationship="Self.FK__DATOS_COM__RUC_c__412EB0B6" FromRole="DATOS_COMPRA" ToRole="ENCARGADO" />
+    <NavigationProperty Name="PROVEEDOR" Relationship="Self.FK__DATOS_COM__RUC_p__4222D4EF" FromRole="DATOS_COMPRA" ToRole="PROVEEDOR" />
+    <NavigationProperty Name="INCLUYE" Relationship="Self.FK__INCLUYE__nro_ord__47DBAE45" FromRole="DATOS_COMPRA" ToRole="INCLUYE" />
+  </EntityType>
+  <EntityType Name="ENCARGADO">
+    <Key>
+      <PropertyRef Name="RUC_cliente" />
+    </Key>
+    <Property Name="RUC_cliente" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nombre_Empresa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="padron" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="DATOS_COMPRA" Relationship="Self.FK__DATOS_COM__RUC_c__412EB0B6" FromRole="ENCARGADO" ToRole="DATOS_COMPRA" />
+  </EntityType>
+  <EntityType Name="PAGO">
+    <Key>
+      <PropertyRef Name="moneda" />
+    </Key>
+    <Property Name="moneda" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Tipo_de_cambio" Type="Decimal" Precision="8" Scale="6" Nullable="false" />
+    <NavigationProperty Name="DATOS_COMPRA" Relationship="Self.FK__DATOS_COM__moned__4316F928" FromRole="PAGO" ToRole="DATOS_COMPRA" />
+  </EntityType>
+  <EntityType Name="PROVEEDOR">
+    <Key>
+      <PropertyRef Name="RUC_proveedor" />
+    </Key>
+    <Property Name="RUC_proveedor" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nombre_empresa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="padron" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="ciudad" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="distrito" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="calle" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="numero" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="ARTICULO" Relationship="Self.FK__ARTICULO__RUC_pr__45F365D3" FromRole="PROVEEDOR" ToRole="ARTICULO" />
+    <NavigationProperty Name="DATOS_COMPRA" Relationship="Self.FK__DATOS_COM__RUC_p__4222D4EF" FromRole="PROVEEDOR" ToRole="DATOS_COMPRA" />
+  </EntityType>
+  <EntityType Name="INCLUYE">
+    <Key>
+      <PropertyRef Name="nro_orden_compra" />
+      <PropertyRef Name="codigo_A" />
+      <PropertyRef Name="cantidad" />
+    </Key>
+    <Property Name="nro_orden_compra" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="codigo_A" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="cantidad" Type="Int32" Nullable="false" />
+    <Property Name="subtotal" Type="Decimal" Precision="8" Scale="2" />
+    <NavigationProperty Name="ARTICULO" Relationship="Self.FK__INCLUYE__codigo___48CFD27E" FromRole="INCLUYE" ToRole="ARTICULO" />
+    <NavigationProperty Name="DATOS_COMPRA" Relationship="Self.FK__INCLUYE__nro_ord__47DBAE45" FromRole="INCLUYE" ToRole="DATOS_COMPRA" />
+  </EntityType>
+  <Association Name="FK__ARTICULO__RUC_pr__45F365D3">
+    <End Role="PROVEEDOR" Type="Self.PROVEEDOR" Multiplicity="1" />
+    <End Role="ARTICULO" Type="Self.ARTICULO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PROVEEDOR">
+        <PropertyRef Name="RUC_proveedor" />
+      </Principal>
+      <Dependent Role="ARTICULO">
+        <PropertyRef Name="RUC_proveedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__INCLUYE__codigo___48CFD27E">
+    <End Role="ARTICULO" Type="Self.ARTICULO" Multiplicity="1" />
+    <End Role="INCLUYE" Type="Self.INCLUYE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ARTICULO">
+        <PropertyRef Name="codigo_A" />
+      </Principal>
+      <Dependent Role="INCLUYE">
+        <PropertyRef Name="codigo_A" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DATOS_COM__moned__4316F928">
+    <End Role="PAGO" Type="Self.PAGO" Multiplicity="1" />
+    <End Role="DATOS_COMPRA" Type="Self.DATOS_COMPRA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PAGO">
+        <PropertyRef Name="moneda" />
+      </Principal>
+      <Dependent Role="DATOS_COMPRA">
+        <PropertyRef Name="moneda" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DATOS_COM__RUC_c__412EB0B6">
+    <End Role="ENCARGADO" Type="Self.ENCARGADO" Multiplicity="1" />
+    <End Role="DATOS_COMPRA" Type="Self.DATOS_COMPRA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ENCARGADO">
+        <PropertyRef Name="RUC_cliente" />
+      </Principal>
+      <Dependent Role="DATOS_COMPRA">
+        <PropertyRef Name="RUC_cliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DATOS_COM__RUC_p__4222D4EF">
+    <End Role="PROVEEDOR" Type="Self.PROVEEDOR" Multiplicity="1" />
+    <End Role="DATOS_COMPRA" Type="Self.DATOS_COMPRA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PROVEEDOR">
+        <PropertyRef Name="RUC_proveedor" />
+      </Principal>
+      <Dependent Role="DATOS_COMPRA">
+        <PropertyRef Name="RUC_proveedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__INCLUYE__nro_ord__47DBAE45">
+    <End Role="DATOS_COMPRA" Type="Self.DATOS_COMPRA" Multiplicity="1" />
+    <End Role="INCLUYE" Type="Self.INCLUYE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DATOS_COMPRA">
+        <PropertyRef Name="nro_orden_compra" />
+      </Principal>
+      <Dependent Role="INCLUYE">
+        <PropertyRef Name="nro_orden_compra" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="OCEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ARTICULO" EntityType="Self.ARTICULO" />
+    <EntitySet Name="DATOS_COMPRA" EntityType="Self.DATOS_COMPRA" />
+    <EntitySet Name="ENCARGADO" EntityType="Self.ENCARGADO" />
+    <EntitySet Name="PAGO" EntityType="Self.PAGO" />
+    <EntitySet Name="PROVEEDOR" EntityType="Self.PROVEEDOR" />
+    <EntitySet Name="INCLUYE" EntityType="Self.INCLUYE" />
+    <AssociationSet Name="FK__ARTICULO__RUC_pr__45F365D3" Association="Self.FK__ARTICULO__RUC_pr__45F365D3">
+      <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
+      <End Role="ARTICULO" EntitySet="ARTICULO" />
+    </AssociationSet>
+    <AssociationSet Name="FK__INCLUYE__codigo___48CFD27E" Association="Self.FK__INCLUYE__codigo___48CFD27E">
+      <End Role="ARTICULO" EntitySet="ARTICULO" />
+      <End Role="INCLUYE" EntitySet="INCLUYE" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DATOS_COM__moned__4316F928" Association="Self.FK__DATOS_COM__moned__4316F928">
+      <End Role="PAGO" EntitySet="PAGO" />
+      <End Role="DATOS_COMPRA" EntitySet="DATOS_COMPRA" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DATOS_COM__RUC_c__412EB0B6" Association="Self.FK__DATOS_COM__RUC_c__412EB0B6">
+      <End Role="ENCARGADO" EntitySet="ENCARGADO" />
+      <End Role="DATOS_COMPRA" EntitySet="DATOS_COMPRA" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DATOS_COM__RUC_p__4222D4EF" Association="Self.FK__DATOS_COM__RUC_p__4222D4EF">
+      <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
+      <End Role="DATOS_COMPRA" EntitySet="DATOS_COMPRA" />
+    </AssociationSet>
+    <AssociationSet Name="FK__INCLUYE__nro_ord__47DBAE45" Association="Self.FK__INCLUYE__nro_ord__47DBAE45">
+      <End Role="DATOS_COMPRA" EntitySet="DATOS_COMPRA" />
+      <End Role="INCLUYE" EntitySet="INCLUYE" />
+    </AssociationSet>
+    <FunctionImport Name="sp_ordenCompra_entre_fecha" ReturnType="Collection(String)">
+      <Parameter Name="limteInf" Mode="In" Type="DateTime" />
+      <Parameter Name="limteSup" Mode="In" Type="DateTime" />
+    </FunctionImport>
+  </EntityContainer>
+</Schema>

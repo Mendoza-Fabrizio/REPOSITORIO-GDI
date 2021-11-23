@@ -5,6 +5,24 @@
 }
 
 <h2>Index</h2>
-<table>
-
+<table class=" table table-bordered table-hover">
+    <tr>
+        <td>@Html.LabelFor(p => Model[0].codigoarticulo)</td>
+        <td>@Html.LabelFor(p => Model[0].rucproveedor)</td>
+        <td>@Html.LabelFor(p => Model[0].nombrearticulo)</td>
+        <td>@Html.LabelFor(p => Model[0].precio)</td>
+        <td>@Html.LabelFor(p => Model[0].stock)</td>
+        <td>@Html.LabelFor(p => Model[0].unidad)</td>
+    </tr>
+    @foreach(var item in Model)
+            {
+                <tr>
+                    <td>@item.codigoarticulo</td>
+                    <td>@item.rucproveedor</td>
+                    <td>@item.nombrearticulo</td>
+                    <td>@item.precio</td>
+                    <td>@item.stock</td>
+                    <td>@item.unidad</td>
+                </tr>
+            }
 </table>
